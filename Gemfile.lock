@@ -9,7 +9,7 @@ GEM
     metaclass (0.0.1)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
-    puppet (3.4.1)
+    puppet (3.4.2)
       facter (~> 1.6)
       hiera (~> 1.0)
       rgen (~> 0.6.5)

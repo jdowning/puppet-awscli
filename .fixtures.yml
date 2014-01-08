@@ -1,0 +1,4 @@
+---
+fixtures:
+  symlinks:
+    awscli: "#{source_dir}"

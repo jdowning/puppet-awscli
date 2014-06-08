@@ -4,7 +4,10 @@
 #
 # === Parameters
 #
-#  package_ensure - Provides ability to change the version of awscli being installed.
+#  [$version]
+#    Provides ability to change the version of awscli being installed.
+#    Default: 'latest'
+#    This variable is required.
 #
 # === Variables
 #
@@ -23,12 +26,12 @@
 # Copyright 2014 Justin Downing
 #
 class awscli (
-  $package_ensure = 'latest'
+  $version = 'latest'
 ) {
   include awscli::deps
 
   package { 'awscli':
-    ensure   => $package_ensure,
+    ensure   => $version,
     provider => 'pip',
     require  => Class['awscli::deps'],
   }

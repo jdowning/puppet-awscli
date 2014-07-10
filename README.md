@@ -1,6 +1,6 @@
 # awscli
 
-[![Build Status](https://travis-ci.org/justindowning/puppet-awscli.png)](https://travis-ci.org/justindowning/puppet-awscli)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/jdowning/awscli.svg)](https://forge.puppetlabs.com/jdowning/awscli) [![Build Status](https://travis-ci.org/justindowning/puppet-awscli.png)](https://travis-ci.org/justindowning/puppet-awscli)
 
 ## Description
 

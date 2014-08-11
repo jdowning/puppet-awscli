@@ -1,5 +1,5 @@
 name    'jdowning/awscli'
-version '0.1.1'
+version '0.2.0'
 source 'https://github.com/justindowning/puppet-awscli'
 author 'Justin Downing'
 license 'Apache License, Version 2.0'

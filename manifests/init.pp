@@ -6,7 +6,7 @@
 #
 #  [$version]
 #    Provides ability to change the version of awscli being installed.
-#    Default: 'latest'
+#    Default: 'present'
 #    This variable is required.
 #
 # === Variables
@@ -26,7 +26,7 @@
 # Copyright 2014 Justin Downing
 #
 class awscli (
-  $version = 'latest'
+  $version = 'present'
 ) {
   include awscli::deps
 

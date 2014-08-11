@@ -6,7 +6,7 @@ describe 'awscli', :type => 'class' do
   it { should contain_class('awscli::deps') }
 
   it do should contain_package('awscli').with(
-    'ensure'   => 'latest',
+    'ensure'   => 'present',
     'provider' => 'pip',
   ) end
 end

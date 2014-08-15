@@ -1,4 +1,6 @@
 ---
 fixtures:
+  repositories:
+    epel: https://github.com/stahnma/puppet-module-epel
   symlinks:
     awscli: "#{source_dir}"

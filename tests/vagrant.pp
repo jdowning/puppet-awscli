@@ -1,1 +1,1 @@
-class { 'awscli': }
+class { 'awscli': version => 'latest' }

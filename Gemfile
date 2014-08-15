@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
-puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>= 3.2']
+puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>= 3.6']
 
+gem 'librarian-puppet'
 gem 'rake'
 gem 'puppet', puppetversion
 gem 'puppet-blacksmith'

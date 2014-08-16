@@ -4,7 +4,7 @@
 
 ## Description
 
-This Puppet module will install [awscli](https://github.com/aws/aws-cli). It is works with Debian/Ubuntu based distros. It should also work with RedHat/CentOS as long as the EPEL repository is available.
+This Puppet module will install [awscli](https://github.com/aws/aws-cli). It is works with Debian and RedHat based distros.
 
 ## Installation
 

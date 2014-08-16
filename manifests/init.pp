@@ -9,10 +9,6 @@
 #    Default: 'present'
 #    This variable is required.
 #
-# === Variables
-#
-#  None
-#
 # === Examples
 #
 #  class { awscli: }

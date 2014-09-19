@@ -18,6 +18,6 @@ class awscli::deps {
     'RedHat': {
       include awscli::deps::redhat
     }
-    default:  { fail('The wal_e module currently only suports Debian and RedHat families') }
+    default:  { fail('The awscli module currently only suports Debian and RedHat families') }
   }
 }

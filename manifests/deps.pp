@@ -21,6 +21,6 @@ class awscli::deps {
     'Darwin': {
       include awscli::deps::osx
     }
-    default:  { fail('The awscli module currently only suports Debian and RedHat families') }
+    default:  { fail("The awscli module does not support ${::osfamily}") }
   }
 }

@@ -4,9 +4,7 @@ branches:
     - master
 language: ruby
 rvm:
-  - 1.9.3
-bundler_args: --without development
-script: bundle exec rake spec SPEC_OPTS='--format documentation'
+  - 2.0.0
 env:
   - PUPPET_VERSION="2.7.26"
   - PUPPET_VERSION="3.1.1"
@@ -15,6 +13,10 @@ env:
   - PUPPET_VERSION="3.4.3"
   - PUPPET_VERSION="3.5.1"
   - PUPPET_VERSION="3.6.2"
+  - PUPPET_VERSION="3.7.3"
+sudo: false
+bundler_args: --without development
+script: bundle exec rake spec SPEC_OPTS='--format documentation'
 notifications:
   email:
     - justin@downing.us

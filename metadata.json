@@ -1,6 +1,6 @@
 {
   "name": "jdowning/awscli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "source": "https://github.com/justindowning/puppet-awscli",
   "author": "Justin Downing",
   "license": "Apache-2.0",

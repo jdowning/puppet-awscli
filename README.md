@@ -19,6 +19,31 @@ OSX has been tested on Yosemite only and requires:
 
 `class { 'awscli': }`
 
+### Profiles
+
+If you want to add a credentials for awscli you can do it by using awscli::profile:
+
+If you just define access_key_id and secret key, these credentials will work only for the root user:
+
+```
+awscli::profile {
+  'default':
+    aws_access_key_id     => 'MYAWSACCESSKEYID',
+    aws_secret_access_key => 'MYAWSSECRETACESSKEY'
+}
+```
+
+You can also define a profile for a custom user:
+
+```
+awscli::profile {
+  'default':
+    user                  => 'ubuntu',
+    aws_access_key_id     => 'MYAWSACCESSKEYID',
+    aws_secret_access_key => 'MYAWSSECRETACESSKEY'
+}
+```
+
 ## Testing
 You can test this module with rspec:
 

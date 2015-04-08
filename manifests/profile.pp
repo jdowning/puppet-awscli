@@ -33,7 +33,7 @@ define awscli::profile(
 
   if !defined(File["${homedir}/.aws"]) {
     file { "${homedir}/.aws":
-      ensure => 'directory'
+      ensure => 'directory',
       owner  => $user,
       group  => $user
     }

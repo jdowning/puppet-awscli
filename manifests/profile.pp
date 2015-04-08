@@ -4,6 +4,8 @@
 #
 # === Options
 #
+# [*user*]
+#    The user for whom the profile will be installed
 # [*aws_access_key_id*]
 #    The aws_access_key_id for this profile
 #
@@ -24,27 +26,29 @@ define awscli::profile(
   }
 
   if $user != 'root' {
-    $homedir = "/home/$user"
+    $homedir = "/home/${user}"
   } else {
-    $homedir = "/root"
+    $homedir = '/root'
   }
 
-  if !defined(File["homedir/.aws"]) {
-    file { "$homedir/.aws":
+  if !defined(File["${homedir}/.aws"]) {
+    file { "${homedir}/.aws":
       ensure => 'directory'
+      owner  => $user,
+      group  => $user
     }
   }
 
-  if !defined(Concat["$homedir/.aws/credentials"]) {
-    concat { "$homedir/.aws/credentials":
+  if !defined(Concat["${homedir}/.aws/credentials"]) {
+    concat { "${homedir}/.aws/credentials":
       ensure => 'present'
     }
   }
 
 
-  concat::fragment{ "$title":
-    target  => "$homedir/.aws/credentials",
-    content => "[$title]\naws_access_key_id=$aws_access_key_id\naws_secret_access_key=$aws_secret_access_key\n\n",
+  concat::fragment{ $title:
+    target  => "${homedir}/.aws/credentials",
+    content => template('awscli/credentials_concat.erb')
   }
 }
 

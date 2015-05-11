@@ -26,7 +26,10 @@ define awscli::profile(
   }
 
   if $user != 'root' {
-    $homedir = "/home/${user}"
+    $homedir = $::osfamily? {
+      'Darwin' => "/Users/${user}",
+      default  => "/home/${user}"
+    }
   } else {
     $homedir = '/root'
   }

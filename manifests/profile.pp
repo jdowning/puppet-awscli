@@ -30,21 +30,28 @@ define awscli::profile(
       'Darwin' => "/Users/${user}",
       default  => "/home/${user}"
     }
+    $group = $::osfamily? {
+      'Darwin' => 'staff',
+      default  => $user
+    }
   } else {
     $homedir = '/root'
+    $group   = 'root'
   }
 
   if !defined(File["${homedir}/.aws"]) {
     file { "${homedir}/.aws":
       ensure => 'directory',
       owner  => $user,
-      group  => $user
+      group  => $group
     }
   }
 
   if !defined(Concat["${homedir}/.aws/credentials"]) {
     concat { "${homedir}/.aws/credentials":
-      ensure => 'present'
+      ensure => 'present',
+      owner  => $user,
+      group  => $group
     }
   }
 

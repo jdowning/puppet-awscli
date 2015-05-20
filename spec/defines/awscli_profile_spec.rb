@@ -41,10 +41,19 @@ describe 'awscli::profile', :type => :define do
         } }
 
         it 'should create profile for root if no user is given' do
-          is_expected.to contain_file('/root/.aws').with_ensure('directory')
-          is_expected.to contain_concat('/root/.aws/credentials')
-          is_expected.to contain_concat__fragment( 'test_profile' ).with
-          ({
+          is_expected.to contain_file('/root/.aws').with(
+          {
+            :ensure => 'directory',
+            :owner  => 'root',
+            :group  => 'root'
+          })
+          is_expected.to contain_concat('/root/.aws/credentials').with(
+          {
+            :owner  => 'root',
+            :group  => 'root'
+          })
+          is_expected.to contain_concat__fragment( 'test_profile' ).with(
+          {
             :target =>  '/root/.aws/credentials'
           })
         end
@@ -53,10 +62,19 @@ describe 'awscli::profile', :type => :define do
           params.merge!({
             'user'                  => 'test',
           })
-          is_expected.to contain_file('/home/test/.aws').with_ensure('directory')
-          is_expected.to contain_concat('/home/test/.aws/credentials')
-          is_expected.to contain_concat__fragment( 'test_profile' ).with
-          ({
+          is_expected.to contain_file('/home/test/.aws').with(
+          {
+            :ensure => 'directory',
+            :owner  => 'test',
+            :group  => 'test'
+          })
+          is_expected.to contain_concat('/home/test/.aws/credentials').with(
+          {
+            :owner  => 'test',
+            :group  => 'test'
+          })
+          is_expected.to contain_concat__fragment( 'test_profile' ).with(
+          {
             :target =>  '/home/test/.aws/credentials'
           })
         end
@@ -79,10 +97,19 @@ describe 'awscli::profile', :type => :define do
     } }
 
     it 'should create profile for user test' do
-      is_expected.to contain_file('/Users/test/.aws').with_ensure('directory')
-      is_expected.to contain_concat('/Users/test/.aws/credentials')
-      is_expected.to contain_concat__fragment( 'test_profile' ).with
-      ({
+      is_expected.to contain_file('/Users/test/.aws').with(
+      {
+        :ensure => 'directory',
+        :owner  => 'test',
+        :group  => 'staff'
+      })
+      is_expected.to contain_concat('/Users/test/.aws/credentials').with(
+      {
+        :owner  => 'test',
+        :group  => 'staff'
+      })
+      is_expected.to contain_concat__fragment( 'test_profile' ).with(
+      {
         :target =>  '/Users/test/.aws/credentials'
       })
     end

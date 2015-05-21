@@ -78,6 +78,19 @@ describe 'awscli::profile', :type => :define do
             :target =>  '/home/test/.aws/credentials'
           })
         end
+
+        it 'should create profile for user test with homedir /tmp' do
+          params.merge!({
+            'user'    => 'test',
+            'homedir' => '/tmp'      
+          })
+          is_expected.to contain_file('/tmp/.aws')
+          is_expected.to contain_concat('/tmp/.aws/credentials')
+          is_expected.to contain_concat__fragment( 'test_profile' ).with(
+          {
+            :target =>  '/tmp/.aws/credentials'
+          })
+        end
       end
     end
   end
@@ -111,6 +124,18 @@ describe 'awscli::profile', :type => :define do
       is_expected.to contain_concat__fragment( 'test_profile' ).with(
       {
         :target =>  '/Users/test/.aws/credentials'
+      })
+    end
+    it 'should create profile for user test with homedir /tmp' do
+      params.merge!({
+        'user'    => 'test',
+        'homedir' => '/tmp'      
+      })
+      is_expected.to contain_file('/tmp/.aws')
+      is_expected.to contain_concat('/tmp/.aws/credentials')
+      is_expected.to contain_concat__fragment( 'test_profile' ).with(
+      {
+        :target =>  '/tmp/.aws/credentials'
       })
     end
   end

@@ -14,6 +14,7 @@
 #
 define awscli::profile(
   $user                  = 'root',
+  $homedir               = undef,
   $aws_access_key_id     = undef,
   $aws_secret_access_key = undef,
 ) {
@@ -25,41 +26,46 @@ define awscli::profile(
     fail ('no aws_secret_access_key provided')
   }
 
-  if $user != 'root' {
-    $homedir = $::osfamily? {
-      'Darwin' => "/Users/${user}",
-      default  => "/home/${user}"
+  if $homedir {
+    $homedir_real = $homedir
+  } else {
+    if $user != 'root' {
+      $homedir_real = $::osfamily? {
+        'Darwin' => "/Users/${user}",
+        default  => "/home/${user}"
+      }
+    } else {
+      $homedir_real = '/root'
     }
+  } 
+  
+  if $user != 'root' {
     $group = $::osfamily? {
       'Darwin' => 'staff',
       default  => $user
     }
   } else {
-    $homedir = '/root'
-    $group   = 'root'
+    $group = 'root'
   }
 
-  if !defined(File["${homedir}/.aws"]) {
-    file { "${homedir}/.aws":
+  if !defined(File["${homedir_real}/.aws"]) {
+    file { "${homedir_real}/.aws":
       ensure => 'directory',
       owner  => $user,
       group  => $group
     }
   }
 
-  if !defined(Concat["${homedir}/.aws/credentials"]) {
-    concat { "${homedir}/.aws/credentials":
+  if !defined(Concat["${homedir_real}/.aws/credentials"]) {
+    concat { "${homedir_real}/.aws/credentials":
       ensure => 'present',
       owner  => $user,
       group  => $group
     }
   }
 
-
   concat::fragment{ $title:
-    target  => "${homedir}/.aws/credentials",
+    target  => "${homedir_real}/.aws/credentials",
     content => template('awscli/credentials_concat.erb')
   }
 }
-
-

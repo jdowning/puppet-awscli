@@ -79,12 +79,46 @@ describe 'awscli::profile', :type => :define do
           })
         end
 
+        it 'should create profile for user test and group testGroup' do
+          params.merge!({
+            'user'                  => 'test',
+            'group'                  => 'testGroup',
+          })
+          is_expected.to contain_file('/home/test/.aws').with(
+          {
+            :ensure => 'directory',
+            :owner  => 'test',
+            :group  => 'testGroup'
+          })
+          is_expected.to contain_concat('/home/test/.aws/credentials').with(
+          {
+            :owner  => 'test',
+            :group  => 'testGroup'
+          })
+        end
+
         it 'should create profile for user test with homedir /tmp' do
           params.merge!({
             'user'    => 'test',
             'homedir' => '/tmp'      
           })
           is_expected.to contain_file('/tmp/.aws')
+          is_expected.to contain_concat('/tmp/.aws/credentials')
+          is_expected.to contain_concat__fragment( 'test_profile' ).with(
+          {
+            :target =>  '/tmp/.aws/credentials'
+          })
+        end
+        it 'should create profile for user test with group testGroup with homedir /tmp' do
+          params.merge!({
+            'user'    => 'test',
+            'group'    => 'testGroup',
+            'homedir' => '/tmp'
+          })
+          is_expected.to contain_file('/tmp/.aws').with({
+            :owner  => 'test',
+            :group  => 'testGroup'
+          })
           is_expected.to contain_concat('/tmp/.aws/credentials')
           is_expected.to contain_concat__fragment( 'test_profile' ).with(
           {
@@ -126,12 +160,49 @@ describe 'awscli::profile', :type => :define do
         :target =>  '/Users/test/.aws/credentials'
       })
     end
+    it 'should create profile for user test and group staff' do
+      params.merge!({
+        'group'    => 'testGroup',
+      })
+      is_expected.to contain_file('/Users/test/.aws').with(
+      {
+        :ensure => 'directory',
+        :owner  => 'test',
+        :group  => 'testGroup'
+      })
+      is_expected.to contain_concat('/Users/test/.aws/credentials').with(
+      {
+        :owner  => 'test',
+        :group  => 'testGroup'
+      })
+      is_expected.to contain_concat__fragment( 'test_profile' ).with(
+      {
+        :target =>  '/Users/test/.aws/credentials'
+      })
+    end
     it 'should create profile for user test with homedir /tmp' do
       params.merge!({
         'user'    => 'test',
         'homedir' => '/tmp'      
       })
       is_expected.to contain_file('/tmp/.aws')
+      is_expected.to contain_concat('/tmp/.aws/credentials')
+      is_expected.to contain_concat__fragment( 'test_profile' ).with(
+      {
+        :target =>  '/tmp/.aws/credentials'
+      })
+    end
+    it 'should create profile for user test with group staff with homedir /tmp' do
+      params.merge!({
+        'user'    => 'test',
+        'group'    => 'testGroup',
+        'homedir' => '/tmp'
+      })
+      is_expected.to contain_file('/tmp/.aws').with(
+      {
+        :owner  => 'test',
+        :group  => 'testGroup'
+      })
       is_expected.to contain_concat('/tmp/.aws/credentials')
       is_expected.to contain_concat__fragment( 'test_profile' ).with(
       {

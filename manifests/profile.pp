@@ -17,6 +17,7 @@ define awscli::profile(
   $homedir               = undef,
   $aws_access_key_id     = undef,
   $aws_secret_access_key = undef,
+  $aws_region            = undef,
 ) {
   if $aws_access_key_id == undef {
     fail ('no aws_access_key_id provided')
@@ -64,8 +65,23 @@ define awscli::profile(
     }
   }
 
-  concat::fragment{ $title:
+  concat::fragment{ "credential-file-append":
     target  => "${homedir_real}/.aws/credentials",
     content => template('awscli/credentials_concat.erb')
+  }
+
+  if $aws_region != undef {
+    if !defined(Concat["${homedir_real}/.aws/config"]) {
+      concat { "${homedir_real}/.aws/config":
+        ensure => 'present',
+        owner  => $user,
+        group  => $group
+      }
+    }
+
+    concat::fragment{ "config-file-append":
+      target  => "${homedir_real}/.aws/config",
+      content => template('awscli/config_concat.erb')
+    }
   }
 }

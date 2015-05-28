@@ -44,6 +44,19 @@ awscli::profile {
 }
 ```
 
+If the user has a non-standard `${HOME}` location (`/home/${USER}` on Linux,
+`/Users/${USER}` on Mac OS X are considered the standard locations), you can specify the homedir explicitly:
+
+```
+awscli::profile {
+  'default':
+    user                  => 'ubuntu',
+    homedir               => '/tmp',
+    aws_access_key_id     => 'MYAWSACCESSKEYID',
+    aws_secret_access_key => 'MYAWSSECRETACESSKEY'
+}
+```
+
 ## Testing
 You can test this module with rspec:
 

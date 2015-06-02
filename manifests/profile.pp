@@ -14,6 +14,7 @@
 #
 define awscli::profile(
   $user                  = 'root',
+  $group            = undef,
   $homedir               = undef,
   $aws_access_key_id     = undef,
   $aws_secret_access_key = undef,
@@ -39,20 +40,24 @@ define awscli::profile(
     }
   } 
   
-  if $user != 'root' {
-    $group = $::osfamily? {
-      'Darwin' => 'staff',
-      default  => $user
+  if ($group == undef) {
+    if $user != 'root' {
+      $group_real = $::osfamily? {
+        'Darwin' => 'staff',
+        default  => $user
+      }
+    } else {
+      $group_real = 'root'
     }
   } else {
-    $group = 'root'
+    $group_real = $group
   }
 
   if !defined(File["${homedir_real}/.aws"]) {
     file { "${homedir_real}/.aws":
       ensure => 'directory',
       owner  => $user,
-      group  => $group
+      group  => $group_real
     }
   }
 
@@ -60,7 +65,7 @@ define awscli::profile(
     concat { "${homedir_real}/.aws/credentials":
       ensure => 'present',
       owner  => $user,
-      group  => $group
+      group  => $group_real
     }
   }
 

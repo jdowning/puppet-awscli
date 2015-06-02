@@ -52,7 +52,7 @@ describe 'awscli::profile', :type => :define do
             :owner  => 'root',
             :group  => 'root'
           })
-          is_expected.to contain_concat__fragment( 'test_profile' ).with(
+          is_expected.to contain_concat__fragment( 'credential-file-append' ).with(
           {
             :target =>  '/root/.aws/credentials'
           })
@@ -73,9 +73,35 @@ describe 'awscli::profile', :type => :define do
             :owner  => 'test',
             :group  => 'test'
           })
-          is_expected.to contain_concat__fragment( 'test_profile' ).with(
+          is_expected.to contain_concat__fragment( 'credential-file-append' ).with(
           {
             :target =>  '/home/test/.aws/credentials'
+          })
+
+          is_expected.to_not contain_concat('/home/test/.aws/config').with(
+          {
+            :owner  => 'test',
+            :group  => 'test'
+          })
+          is_expected.to_not contain_concat__fragment( 'config-file-append' ).with(
+          {
+            :target =>  '/home/test/.aws/config'
+          })
+        end
+
+        it 'should create profile for user test with region' do
+          params.merge!({
+            'user'                  => 'test',
+            'aws_region'            => 'test',
+          })
+          is_expected.to contain_concat('/home/test/.aws/config').with(
+          {
+            :owner  => 'test',
+            :group  => 'test'
+          })
+          is_expected.to contain_concat__fragment( 'config-file-append' ).with(
+          {
+            :target =>  '/home/test/.aws/config'
           })
         end
 
@@ -104,7 +130,7 @@ describe 'awscli::profile', :type => :define do
           })
           is_expected.to contain_file('/tmp/.aws')
           is_expected.to contain_concat('/tmp/.aws/credentials')
-          is_expected.to contain_concat__fragment( 'test_profile' ).with(
+          is_expected.to contain_concat__fragment( 'credential-file-append' ).with(
           {
             :target =>  '/tmp/.aws/credentials'
           })
@@ -155,7 +181,7 @@ describe 'awscli::profile', :type => :define do
         :owner  => 'test',
         :group  => 'staff'
       })
-      is_expected.to contain_concat__fragment( 'test_profile' ).with(
+      is_expected.to contain_concat__fragment( 'credential-file-append' ).with(
       {
         :target =>  '/Users/test/.aws/credentials'
       })
@@ -187,7 +213,7 @@ describe 'awscli::profile', :type => :define do
       })
       is_expected.to contain_file('/tmp/.aws')
       is_expected.to contain_concat('/tmp/.aws/credentials')
-      is_expected.to contain_concat__fragment( 'test_profile' ).with(
+      is_expected.to contain_concat__fragment( 'credential-file-append' ).with(
       {
         :target =>  '/tmp/.aws/credentials'
       })

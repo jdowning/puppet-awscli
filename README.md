@@ -21,39 +21,48 @@ OSX has been tested on Yosemite only and requires:
 
 ### Profiles
 
-If you want to add a credentials for awscli you can do it by using awscli::profile:
+If you want to add a credentials for awscli you can do it by using `awscli::profile`:
 
 If you just define access_key_id and secret key, these credentials will work only for the root user:
 
 ```
-awscli::profile {
-  'default':
-    aws_access_key_id     => 'MYAWSACCESSKEYID',
-    aws_secret_access_key => 'MYAWSSECRETACESSKEY'
+awscli::profile { 'default':
+  aws_access_key_id     => 'MYAWSACCESSKEYID',
+  aws_secret_access_key => 'MYAWSSECRETACESSKEY'
 }
 ```
 
 You can also define a profile for a custom user:
 
 ```
-awscli::profile {
-  'default':
-    user                  => 'ubuntu',
-    aws_access_key_id     => 'MYAWSACCESSKEYID',
-    aws_secret_access_key => 'MYAWSSECRETACESSKEY'
+awscli::profile { 'default':
+  user                  => 'ubuntu',
+  aws_access_key_id     => 'MYAWSACCESSKEYID',
+  aws_secret_access_key => 'MYAWSSECRETACESSKEY'
 }
 ```
 
 If the user has a non-standard `${HOME}` location (`/home/${USER}` on Linux,
-`/Users/${USER}` on Mac OS X are considered the standard locations), you can specify the homedir explicitly:
+`/Users/${USER}` on Mac OS X), you can specify the homedir explicitly:
 
 ```
-awscli::profile {
-  'default':
-    user                  => 'ubuntu',
-    homedir               => '/tmp',
-    aws_access_key_id     => 'MYAWSACCESSKEYID',
-    aws_secret_access_key => 'MYAWSSECRETACESSKEY'
+awscli::profile { 'default':
+  user                  => 'ubuntu',
+  homedir               => '/tmp',
+  aws_access_key_id     => 'MYAWSACCESSKEYID',
+  aws_secret_access_key => 'MYAWSSECRETACESSKEY'
+}
+```
+
+You can also define the profile's region and output format:
+
+```
+awscli::profile { 'default':
+  user                  => 'ubuntu',
+  aws_access_key_id     => 'MYAWSACCESSKEYID',
+  aws_secret_access_key => 'MYAWSSECRETACESSKEY'
+  aws_region            => 'eu-west-1',
+  output                => 'text',
 }
 ```
 

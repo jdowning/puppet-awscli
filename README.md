@@ -21,8 +21,7 @@ OSX has been tested on Yosemite only and requires:
 
 ### Profiles
 
-If you want to add a credentials for awscli you can do it by using `awscli::profile`:
-
+You may want to add a credentials for awscli and can do so using `awscli::profile`.
 If you just define access_key_id and secret key, these credentials will work only for the root user:
 
 ```
@@ -65,6 +64,9 @@ awscli::profile { 'default':
   output                => 'text',
 }
 ```
+
+If you do not provide `aws::profile::aws_access_key_id` and `awscli::profile::aws_secret_access_key`,
+then the aws-cli tool can use IAM roles to authenticate a user's request.
 
 ## Testing
 You can test this module with rspec:

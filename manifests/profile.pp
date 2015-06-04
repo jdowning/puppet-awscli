@@ -14,10 +14,12 @@
 #   The home directory where the config and credentials will be placed
 #
 # [$aws_access_key_id]
-#   The aws_access_key_id for this profile
+#   The aws_access_key_id for this profile. If not specified, aws-cli can
+#   can use IAM roles to authenticate.
 #
 # [$aws_secret_access_key]
-#   The aws_secret_access_key for this profile
+#   The aws_secret_access_key for this profile. If not specified, aws-cli can
+#   can use IAM roles to authenticate.
 #
 # [$aws_region]
 #   The aws_region for this profile
@@ -46,12 +48,9 @@ define awscli::profile(
   $aws_region            = 'us-east-1',
   $output                = 'json',
 ) {
-  if $aws_access_key_id == undef {
-    fail ('no aws_access_key_id provided')
-  }
-
-  if $aws_secret_access_key == undef {
-    fail ('no aws_secret_access_key provided')
+  if $aws_access_key_id == undef and $aws_secret_access_key == undef {
+    info ('AWS keys for awscli::profile. Your will need IAM roles configured.')
+    $skip_credentials = true
   }
 
   if $homedir {
@@ -68,9 +67,13 @@ define awscli::profile(
   }
 
   if ($group == undef) {
-    $group_real = $::osfamily? {
-      'Darwin' => 'staff',
-      default  => $user
+    if $user != 'root' {
+      $group_real = $::osfamily? {
+        'Darwin' => 'staff',
+        default  => $user
+      }
+    } else {
+      $group_real = 'root'
     }
   } else {
     $group_real = $group
@@ -86,17 +89,19 @@ define awscli::profile(
   }
 
   # setup credentials
-  if !defined(Concat["${homedir_real}/.aws/credentials"]) {
-    concat { "${homedir_real}/.aws/credentials":
-      ensure => 'present',
-      owner  => $user,
-      group  => $group_real
+  if ! $skip_credentials {
+    if !defined(Concat["${homedir_real}/.aws/credentials"]) {
+      concat { "${homedir_real}/.aws/credentials":
+        ensure => 'present',
+        owner  => $user,
+        group  => $group_real
+      }
     }
-  }
 
-  concat::fragment { "${title}-credentials":
-    target  => "${homedir_real}/.aws/credentials",
-    content => template('awscli/credentials_concat.erb')
+    concat::fragment { "${title}-credentials":
+      target  => "${homedir_real}/.aws/credentials",
+      content => template('awscli/credentials_concat.erb')
+    }
   }
 
   # setup config

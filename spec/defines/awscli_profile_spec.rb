@@ -13,13 +13,22 @@ describe 'awscli::profile', :type => :define do
 
         let(:params) { { } }
 
-        it 'should report an error if no aws_access_key_id is given' do
-          is_expected.to raise_error(Puppet::Error, /no aws_access_key_id provided/)
-        end
-
-        it 'should report an error if no aws_secret_access_key is given' do
-          params.merge!({ 'aws_access_key_id' => 'TESTAWSACCESSKEYID' })
-          is_expected.to raise_error(Puppet::Error, /no aws_secret_access_key provided/)
+        it 'should create profile for root if no user is given' do
+          is_expected.to contain_file('/root/.aws').with(
+          {
+            :ensure => 'directory',
+            :owner  => 'root',
+            :group  => 'root'
+          })
+          is_expected.to contain_concat('/root/.aws/config').with(
+          {
+            :owner => 'root',
+            :group => 'root'
+          })
+          is_expected.to contain_concat__fragment( 'test_profile-config' ).with(
+          {
+            :target => '/root/.aws/config'
+          })
         end
       end
     end

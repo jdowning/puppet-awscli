@@ -6,13 +6,15 @@ class awscli::deps::debian {
   constraint {
     "python-dev-package":
       resource  => Package['python-dev'],
-      allow     => { ensure => ['installed', 'present', 'latest' ] };
+      allow     => { ensure => ['installed', 'present', 'latest' ] },
+      weak      => true;
   }
 
   constraint {
     "python-pip-package":
       resource  => Package['python-pip'],
-      allow     => { ensure => ['installed', 'present', 'latest' ] };
+      allow     => { ensure => ['installed', 'present', 'latest' ] },
+      weak      => true;
   }
 
 #  if ! defined(Package['python-dev']) {

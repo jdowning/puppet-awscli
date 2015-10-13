@@ -3,10 +3,22 @@
 # This module manages awscli dependencies for Debian $::osfamily.
 #
 class awscli::deps::debian {
-  if ! defined(Package['python-dev']) {
-    package { 'python-dev': ensure => installed }
+  constraint {
+    "python-dev-package":
+      resource  => Package['python-dev'],
+      allow     => { ensure => ['installed', 'present', 'latest' ] };
   }
-  if ! defined(Package['python-pip']) {
-    package { 'python-pip': ensure => installed }
+
+  constraint {
+    "python-pip-package":
+      resource  => Package['python-pip'],
+      allow     => { ensure => ['installed', 'present', 'latest' ] };
   }
+
+#  if ! defined(Package['python-dev']) {
+#    package { 'python-dev': ensure => installed }
+#  }
+#  if ! defined(Package['python-pip']) {
+#    package { 'python-pip': ensure => installed }
+#  }
 }

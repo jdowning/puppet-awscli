@@ -9,6 +9,16 @@
 #    Default: 'present'
 #    This variable is required.
 #
+#  [$pkg_dev]
+#    Provides ability to install a specific Dev package by name.
+#    Default: See awscli::params Class
+#    This variable is optional.
+#
+#  [$pkg_pip]
+#    Provides ability to install a specific PIP package by name.
+#    Default: See awscli::params Class
+#    This variable is optional.
+#
 # === Examples
 #
 #  class { awscli: }
@@ -22,8 +32,10 @@
 # Copyright 2014 Justin Downing
 #
 class awscli (
-  $version = 'present'
-) {
+  $version = 'present',
+  $pkg_dev = $awscli::params::pkg_dev,
+  $pkg_pip = $awscli::params::pkg_pip
+) inherits awscli::params {
   include awscli::deps
 
   package { 'awscli':

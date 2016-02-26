@@ -6,10 +6,10 @@ class awscli::deps::redhat {
   include ::epel
   Package { require => Class['epel'] }
 
-  if ! defined(Package['python-devel']) {
-    package { 'python-devel': ensure => installed }
+  if ! defined(Package[ $awscli::pkg_dev ]) {
+    package { $awscli::pkg_dev: ensure => installed }
   }
-  if ! defined(Package['python-pip']) {
-    package { 'python-pip': ensure => installed }
+  if ! defined(Package[ $awscli::pkg_pip ]) {
+    package { $awscli::pkg_pip: ensure => installed }
   }
 }

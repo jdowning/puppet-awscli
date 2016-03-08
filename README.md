@@ -66,12 +66,13 @@ awscli::profile { 'myprofile4':
 ```
 
 Finally, if you'd like to use a different profile name,
-you can specify the name directly as a parameter. Note that this is a potentially breaking
-change if you depended on the `$title` for this previously:
+you can specify profile_name directly as a parameter. Note that this is 
+a potentially breaking change if you depended on the `$title` for this
+previously:
 
 ```
 awscli::profile { 'myprofile5':
-  name                  => 'foo',
+  profile_name          => 'foo',
   user                  => 'ubuntu',
   aws_access_key_id     => 'MYAWSACCESSKEYID',
   aws_secret_access_key => 'MYAWSSECRETACESSKEY'

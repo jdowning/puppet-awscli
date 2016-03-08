@@ -25,7 +25,7 @@
 #   The aws_region for this profile
 #   Default: us-east-1
 #
-# [$name]
+# [$profile_name]
 #   The name of the AWS profile
 #   Default: default
 #
@@ -40,7 +40,7 @@
 #   aws_access_key_id     => 'access_key',
 #   aws_secret_access_key => 'secret_key',
 #   aws_region            => 'us-west-2',
-#   name                  => 'default',
+#   profile_name          => 'default',
 #   output                => 'text',
 # }
 #
@@ -51,7 +51,7 @@ define awscli::profile(
   $aws_access_key_id     = undef,
   $aws_secret_access_key = undef,
   $aws_region            = 'us-east-1',
-  $name                  = 'default',
+  $profile_name          = 'default',
   $output                = 'json',
 ) {
   if $aws_access_key_id == undef and $aws_secret_access_key == undef {

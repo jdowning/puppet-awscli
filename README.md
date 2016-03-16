@@ -84,7 +84,7 @@ awscli::profile { 'myprofile5':
 The above will result in a file `~ubuntu/.aws/config` that looks like this:
 
 ```
-[foo]
+[profile foo]
 region=eu-west-1
 output=text
 ```

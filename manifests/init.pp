@@ -51,6 +51,9 @@ class awscli (
   package { 'awscli':
     ensure   => $version,
     provider => 'pip',
-    require  => Class['awscli::deps'],
+    require  => [
+      Package['python-pip'],  
+      Class['awscli::deps'],
+    ],
   }
 }

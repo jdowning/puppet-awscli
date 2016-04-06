@@ -47,6 +47,7 @@ define awscli::profile(
   $aws_secret_access_key = undef,
   $aws_region            = 'us-east-1',
   $output                = 'json',
+  $profile_name          = $title,
 ) {
   if $aws_access_key_id == undef and $aws_secret_access_key == undef {
     info ('AWS keys for awscli::profile. Your will need IAM roles configured.')

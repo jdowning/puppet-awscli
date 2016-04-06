@@ -79,9 +79,10 @@ define awscli::profile(
     $group_real = $group
   }
 
+  $aws_dir = "${homedir_real}/.aws"
   # ensure $homedir/.aws is available
   if !defined(File["${homedir_real}/.aws"]) {
-    file { "${homedir_real}/.aws":
+    file { $aws_dir:
       ensure => 'directory',
       owner  => $user,
       group  => $group_real
@@ -92,9 +93,10 @@ define awscli::profile(
   if ! $skip_credentials {
     if !defined(Concat["${homedir_real}/.aws/credentials"]) {
       concat { "${homedir_real}/.aws/credentials":
-        ensure => 'present',
-        owner  => $user,
-        group  => $group_real
+        ensure  => 'present',
+        owner   => $user,
+        group   => $group_real,
+        require => File[$aws_dir],
       }
     }
 
@@ -107,9 +109,10 @@ define awscli::profile(
   # setup config
   if !defined(Concat["${homedir_real}/.aws/config"]) {
     concat { "${homedir_real}/.aws/config":
-      ensure => 'present',
-      owner  => $user,
-      group  => $group_real
+      ensure  => 'present',
+      owner   => $user,
+      group   => $group_real,
+      require => File[$aws_dir],
     }
   }
 

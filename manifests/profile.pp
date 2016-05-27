@@ -117,7 +117,7 @@ define awscli::profile(
     concat { "${homedir_real}/.aws/config":
       ensure  => 'present',
       owner   => $user,
-      group   => $group_real
+      group   => $group_real,
       require => File["${homedir_real}/.aws"],
     }
   }

@@ -19,6 +19,14 @@
 #    Default: See awscli::params Class
 #    This variable is optional.
 #
+#  [$install_pkgdeps]
+#    Boolean flag to install the package dependencies or not
+#    Default: true
+#
+#  [$install_pip]
+#    Boolean flag to install pip or not
+#    Default: true
+#
 # === Examples
 #
 #  class { awscli: }
@@ -32,15 +40,20 @@
 # Copyright 2014 Justin Downing
 #
 class awscli (
-  $version = 'present',
-  $pkg_dev = $awscli::params::pkg_dev,
-  $pkg_pip = $awscli::params::pkg_pip
+  $version          = 'present',
+  $pkg_dev          = $awscli::params::pkg_dev,
+  $pkg_pip          = $awscli::params::pkg_pip,
+  $install_pkgdeps  = true,
+  $install_pip      = true,
 ) inherits awscli::params {
   include awscli::deps
 
   package { 'awscli':
     ensure   => $version,
     provider => 'pip',
-    require  => Class['awscli::deps'],
+    require  => [
+      Package['python-pip'],  
+      Class['awscli::deps'],
+    ],
   }
 }

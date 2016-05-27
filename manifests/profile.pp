@@ -100,7 +100,8 @@ define awscli::profile(
       concat { "${homedir_real}/.aws/credentials":
         ensure => 'present',
         owner  => $user,
-        group  => $group_real
+        group  => $group_real,
+        mode   => '0600'
       }
     }
 

@@ -65,10 +65,8 @@ awscli::profile { 'myprofile4':
 }
 ```
 
-Finally, if you'd like to use a different profile name,
-you can specify profile_name directly as a parameter. Note that this is
-a potentially breaking change if you depended on the `$title` for this
-previously:
+Finally, if you'd like to use a different profile name, you can specify profile_name directly as a parameter. You can read more in the [aws-cli docs](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-multiple-profiles). (Note that this is
+a potentially breaking change if you depended on the `$title` for this previously):
 
 ```
 awscli::profile { 'myprofile5':

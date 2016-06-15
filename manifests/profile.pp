@@ -25,17 +25,22 @@
 #   The aws_region for this profile
 #   Default: us-east-1
 #
+# [$profile_name]
+#   The name of the AWS profile
+#   Default: default
+#
 # [$output]
 #   The output format used for this profile
 #   Default: json
 #
 # === Example
 #
-# awscli::profile { 'default':
+# awscli::profile { 'tsmith-awscli':
 #   user                  => 'tsmith',
 #   aws_access_key_id     => 'access_key',
 #   aws_secret_access_key => 'secret_key',
 #   aws_region            => 'us-west-2',
+#   profile_name          => 'default',
 #   output                => 'text',
 # }
 #
@@ -46,6 +51,7 @@ define awscli::profile(
   $aws_access_key_id     = undef,
   $aws_secret_access_key = undef,
   $aws_region            = 'us-east-1',
+  $profile_name          = 'default',
   $output                = 'json',
 ) {
   if $aws_access_key_id == undef and $aws_secret_access_key == undef {
@@ -92,9 +98,11 @@ define awscli::profile(
   if ! $skip_credentials {
     if !defined(Concat["${homedir_real}/.aws/credentials"]) {
       concat { "${homedir_real}/.aws/credentials":
-        ensure => 'present',
-        owner  => $user,
-        group  => $group_real
+        ensure  => 'present',
+        owner   => $user,
+        group   => $group_real,
+        mode    => '0600',
+        require => File["${homedir_real}/.aws"],
       }
     }
 
@@ -107,9 +115,10 @@ define awscli::profile(
   # setup config
   if !defined(Concat["${homedir_real}/.aws/config"]) {
     concat { "${homedir_real}/.aws/config":
-      ensure => 'present',
-      owner  => $user,
-      group  => $group_real
+      ensure  => 'present',
+      owner   => $user,
+      group   => $group_real,
+      require => File["${homedir_real}/.aws"],
     }
   }
 

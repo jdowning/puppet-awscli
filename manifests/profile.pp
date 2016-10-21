@@ -63,6 +63,8 @@ define awscli::profile(
   if $aws_access_key_id == undef and $aws_secret_access_key == undef {
     info ('AWS keys for awscli::profile. Your will need IAM roles configured.')
     $skip_credentials = true
+  } else {
+    $skip_credentials = false
   }
 
   if $homedir {

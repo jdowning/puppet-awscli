@@ -14,7 +14,11 @@ class awscli::params {
     }
     'RedHat': {
       $pkg_dev = 'python-devel'
-      $pkg_pip = 'python-pip'
+      if $::operatingsystemrelease =~ /^7/ {
+        $pkg_pip = 'python2-pip'
+      } else {
+        $pkg_pip = 'python-pip'
+      }
     }
     'Darwin': {
       $pkg_dev = 'python'

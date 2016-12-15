@@ -9,7 +9,7 @@ This Puppet module will install [awscli](https://github.com/aws/aws-cli). It is 
 OSX has been tested on Yosemite only and requires:
 - boxen https://boxen.github.com
 - boxen homebrew https://github.com/boxen/puppet-homebrew.
-- Packages python and brew-pip are require to be install using boxen. 
+- Packages python and brew-pip are require to be install using boxen.
 
 ## Installation
 
@@ -50,6 +50,13 @@ awscli::profile { 'myprofile3':
   homedir               => '/tmp',
   aws_access_key_id     => 'MYAWSACCESSKEYID',
   aws_secret_access_key => 'MYAWSSECRETACESSKEY'
+}
+```
+
+To remove a profile, simply set `$ensure => 'absent'`
+```
+awscli::profile { 'myprofile3':
+  ensure => 'absent',
 }
 ```
 

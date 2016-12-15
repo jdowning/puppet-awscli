@@ -4,6 +4,11 @@
 #
 # === Variables
 #
+# [$ensure]
+#
+#   Control whether the profile should be present or not
+#   Default: present
+#
 # [$user]
 #   The user for whom the profile will be installed
 #
@@ -45,6 +50,7 @@
 # }
 #
 define awscli::profile(
+  $ensure                = 'present',
   $user                  = 'root',
   $group                 = undef,
   $homedir               = undef,
@@ -57,6 +63,8 @@ define awscli::profile(
   if $aws_access_key_id == undef and $aws_secret_access_key == undef {
     info ('AWS keys for awscli::profile. Your will need IAM roles configured.')
     $skip_credentials = true
+  } else {
+    $skip_credentials = false
   }
 
   if $homedir {
@@ -90,7 +98,7 @@ define awscli::profile(
     file { "${homedir_real}/.aws":
       ensure => 'directory',
       owner  => $user,
-      group  => $group_real
+      group  => $group_real,
     }
   }
 
@@ -106,9 +114,11 @@ define awscli::profile(
       }
     }
 
-    concat::fragment { "${title}-credentials":
-      target  => "${homedir_real}/.aws/credentials",
-      content => template('awscli/credentials_concat.erb')
+    if ( $ensure == 'present' ) {
+      concat::fragment { "${title}-credentials":
+        target  => "${homedir_real}/.aws/credentials",
+        content => template('awscli/credentials_concat.erb'),
+      }
     }
   }
 
@@ -122,8 +132,10 @@ define awscli::profile(
     }
   }
 
-  concat::fragment { "${title}-config":
-    target  => "${homedir_real}/.aws/config",
-    content => template('awscli/config_concat.erb')
+  if ( $ensure == 'present' ) {
+    concat::fragment { "${title}-config":
+      target  => "${homedir_real}/.aws/config",
+      content => template('awscli/config_concat.erb'),
+    }
   }
 }

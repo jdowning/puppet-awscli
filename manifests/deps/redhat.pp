@@ -2,8 +2,18 @@
 #
 # This module manages awscli dependencies for redhat $::osfamily.
 #
-class awscli::deps::redhat {
-  include ::epel
+class awscli::deps::redhat (
+  $proxy = $awscli::params::proxy,
+) inherits awscli::params {
+  # Check if we have a proxy to setup with EPEL
+  if $proxy != undef {
+    class { '::epel':
+      epel_proxy => $proxy,
+    }
+  }
+  else {
+    include ::epel
+  }
   Package { require => Class['epel'] }
 
   if $awscli::install_pkgdeps {

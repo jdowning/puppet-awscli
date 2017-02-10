@@ -60,24 +60,13 @@ class awscli (
     proxy => $proxy,
   }
 
-  if $install_options != undef {
-    package { 'awscli':
-      ensure          => $version,
-      provider        => 'pip',
-      install_options => $install_options,
-      require         => [
-        Package[$pkg_pip],
-        Class['awscli::deps'],
-      ],
-    }
-  } else {
-    package { 'awscli':
-      ensure   => $version,
-      provider => 'pip',
-      require  => [
-        Package[$pkg_pip],
-        Class['awscli::deps'],
-      ],
-    }
+  package { 'awscli':
+    ensure          => $version,
+    provider        => 'pip',
+    install_options => $install_options,
+    require         => [
+      Package[$pkg_pip],
+      Class['awscli::deps'],
+    ],
   }
 }

@@ -6,6 +6,7 @@
 class awscli::params {
 
   $proxy = undef
+  $install_options = undef
 
   case $::osfamily {
     'Debian': {

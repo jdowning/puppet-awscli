@@ -31,6 +31,10 @@
 #    String proxy variable for use with EPEL module
 #    Default: undef
 #
+#  [$install_options]
+#    Array of install options for the awscli Pip package
+#    Default: undef
+#
 # === Examples
 #
 #  class { awscli: }
@@ -50,17 +54,30 @@ class awscli (
   $install_pkgdeps  = true,
   $install_pip      = true,
   $proxy            = $awscli::params::proxy,
+  $install_options  = $awscli::params::install_options,
 ) inherits awscli::params {
-  class { 'awscli::deps':
+  class { '::awscli::deps':
     proxy => $proxy,
   }
 
-  package { 'awscli':
-    ensure   => $version,
-    provider => 'pip',
-    require  => [
-      Package[$pkg_pip],
-      Class['awscli::deps'],
-    ],
+  if $install_options != undef {
+    package { 'awscli':
+      ensure          => $version,
+      provider        => 'pip',
+      install_options => $install_options,
+      require         => [
+        Package[$pkg_pip],
+        Class['awscli::deps'],
+      ],
+    }
+  } else {
+    package { 'awscli':
+      ensure   => $version,
+      provider => 'pip',
+      require  => [
+        Package[$pkg_pip],
+        Class['awscli::deps'],
+      ],
+    }
   }
 }

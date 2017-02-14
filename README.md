@@ -19,6 +19,8 @@ OSX has been tested on Yosemite only and requires:
 
 `class { 'awscli': }`
 
+There are some optional class parameters, documentation can be found in [init.pp](manifests/init.pp).
+
 ### Profiles
 
 You may want to add a credentials for awscli and can do so using `awscli::profile`.

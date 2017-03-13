@@ -14,7 +14,12 @@ class awscli::params {
       $pkg_pip = 'python-pip'
     }
     'RedHat': {
-      $pkg_dev = 'python-devel'
+        if  $::operatingsystem == 'Amazon' {
+             $pkg_dev = 'python27-devel'
+        } else {
+             $pkg_dev = 'python-devel'
+        }
+     
       if $::operatingsystemrelease =~ /^7/ {
         $pkg_pip = 'python2-pip'
       } else {

@@ -19,6 +19,11 @@
 #    Default: See awscli::params Class
 #    This variable is optional.
 #
+#  [$manage_epel]
+#    Boolean flag to install the EPEL repositories.
+#    Default: true
+#    This variable is optional.
+#
 #  [$install_pkgdeps]
 #    Boolean flag to install the package dependencies or not
 #    Default: true

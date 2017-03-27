@@ -51,6 +51,7 @@ class awscli (
   $version          = 'present',
   $pkg_dev          = $awscli::params::pkg_dev,
   $pkg_pip          = $awscli::params::pkg_pip,
+  $manage_epel      = true,
   $install_pkgdeps  = true,
   $install_pip      = true,
   $proxy            = $awscli::params::proxy,

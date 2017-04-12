@@ -5,3 +5,12 @@
 <% end -%>
 region=<%= @aws_region %>
 output=<%= @output %>
+<% if @role_arn -%>
+role_arn=<%= @role_arn %>
+<% end -%>
+<% if @source_profile -%>
+source_profile=<%= @source_profile %>
+<% end -%>
+<% if @role_session_name -%>
+role_session_name=<%= @role_session_name %>
+<% end -%>

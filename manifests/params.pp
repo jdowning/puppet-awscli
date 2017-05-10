@@ -20,7 +20,7 @@ class awscli::params {
         $pkg_dev = 'python-devel'
       }
 
-      if ($::operatingsystemrelease == defined) {
+      if has_key($facts, $::operatingsystemrelease) {
         if $::operatingsystemrelease =~ /^7/ {
           $pkg_pip = 'python2-pip'
         } else {

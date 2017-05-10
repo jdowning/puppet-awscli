@@ -2,15 +2,13 @@ require 'spec_helper'
 
 describe 'awscli::profile', :type => :define do
   context 'on supported operatingsystems' do
-    [ 'darwin', 'debian', 'redhat'].each do |osfamily|
+    ['darwin', 'debian', 'redhat'].each do |osfamily|
       describe "#{osfamily} installation" do
         let(:facts) { {
           :osfamily       => osfamily,
           :concat_basedir => '/var/lib/puppet/concat/'
         } }
-
         let(:title) { 'test_profile' }
-
         let(:params) { { } }
 
         it 'should create profile for root if no user is given' do
@@ -41,9 +39,7 @@ describe 'awscli::profile', :type => :define do
           :osfamily       => osfamily,
           :concat_basedir => '/var/lib/puppet/concat/'
         } }
-
         let(:title) { 'test_profile' }
-
         let(:params) { {
           'aws_access_key_id'     => 'TESTAWSACCESSKEYID',
           'aws_secret_access_key' => 'TESTSECRETACCESSKEY'

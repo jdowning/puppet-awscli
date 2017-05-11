@@ -26,6 +26,16 @@
 #   The aws_secret_access_key for this profile. If not specified, aws-cli can
 #   can use IAM roles to authenticate.
 #
+# [$role_arn]
+#   The ARN for the role to use in this profile. The source_profile must
+#   be supplied when role_arn is specified
+#
+# [$source_profile]
+#   The profile to use for credentials to assume the specified role
+#
+# [$role_session_name]
+#   An identifier for the assumed role session
+#
 # [$aws_region]
 #   The aws_region for this profile
 #   Default: us-east-1
@@ -45,6 +55,9 @@
 #   aws_access_key_id     => 'access_key',
 #   aws_secret_access_key => 'secret_key',
 #   aws_region            => 'us-west-2',
+#   role_arn              => 'arn:aws:iam::123456789012:role/MyRole',
+#   source_profile        => 'user',
+#   role_session_name     => 'mysession',
 #   profile_name          => 'default',
 #   output                => 'text',
 # }
@@ -56,6 +69,9 @@ define awscli::profile(
   $homedir               = undef,
   $aws_access_key_id     = undef,
   $aws_secret_access_key = undef,
+  $role_arn              = undef,
+  $source_profile        = undef,
+  $role_session_name     = undef,
   $aws_region            = 'us-east-1',
   $profile_name          = 'default',
   $output                = 'json',

@@ -1,0 +1,15 @@
+---
+fixtures:
+  forge_modules:
+    epel:
+      repo: "stahnma/epel"
+      ref: "1.2.2"
+    concat:
+      repo: "puppetlabs/concat"
+      ref: "2.2.1"
+    stdlib: "puppetlabs/stdlib"
+    file_concat:
+      repo: "electrical/file_concat"
+      ref: "1.0.1"
+  symlinks:
+    awscli: "#{source_dir}"

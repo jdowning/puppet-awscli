@@ -1,9 +1,0 @@
----
-fixtures:
-  repositories:
-    epel: https://github.com/stahnma/puppet-module-epel
-    concat: https://github.com/puppetlabs/puppetlabs-concat
-    stdlib: http://github.com/puppetlabs/puppetlabs-stdlib
-    file_concat: https://github.com/electrical/puppet-lib-file_concat
-  symlinks:
-    awscli: "#{source_dir}"

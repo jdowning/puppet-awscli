@@ -12,7 +12,7 @@
   "dependencies": [
     { "name": "stahnma/epel",  "version_requirement": ">= 1.0.0 <2.0.0" },
     { "name": "puppetlabs/stdlib",  "version_requirement": ">= 4.0.0 <5.0.0" },
-    { "name": "puppetlabs/concat",  "version_requirement": ">= 1.0.0 <3.0.0" }
+    { "name": "puppetlabs/concat",  "version_requirement": ">= 2.0.0 <5.0.0" }
   ],
   "operatingsystem_support": [
     {
@@ -41,11 +41,11 @@
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "10.04", "12.04", "14.04" ]
+      "operatingsystemrelease": [ "10.04", "12.04", "14.04", "16.04" ]
     }
   ],
   "requirements": [
-    { "name": "pe", "version_requirement": "3.x" },
-    { "name": "puppet", "version_requirement": "3.x" }
+    { "name": "pe", "version_requirement": ">= 3 < 5.0.0" },
+    { "name": "puppet", "version_requirement": ">= 3 < 5.0.0" }
   ]
 }

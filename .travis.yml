@@ -1,19 +1,69 @@
 ---
 sudo: false
 language: ruby
-rvm:
-  - 2.1.9
 branches:
   only:
     - master
-env:
-  - PUPPET_VERSION="3.4.3"
-  - PUPPET_VERSION="3.5.1"
-  - PUPPET_VERSION="3.6.2"
-  - PUPPET_VERSION="3.7.5"
-  - PUPPET_VERSION="3.8.1"
+matrix:
+  include:
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="3.4.3"
+      - FIXTURES_YML=.puppet3.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="3.5.1"
+      - FIXTURES_YML=.puppet3.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="3.6.2"
+      - FIXTURES_YML=.puppet3.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="3.7.5"
+      - FIXTURES_YML=.puppet3.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="3.8.7"
+      - FIXTURES_YML=.puppet3.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="4.2.3"
+      - FIXTURES_YML=.puppet3.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="4.3.2"
+      - FIXTURES_YML=.puppet3.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="4.4.2"
+      - FIXTURES_YML=.puppet4.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="4.5.3"
+      - FIXTURES_YML=.puppet4.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="4.6.2"
+      - FIXTURES_YML=.puppet4.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="4.7.1"
+      - FIXTURES_YML=.puppet4.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="4.8.2"
+      - FIXTURES_YML=.puppet4.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="4.9.4"
+      - FIXTURES_YML=.puppet4.fixtures.yml
+    - rvm: 2.1.10
+      env:
+      - PUPPET_VERSION="4.10.0"
+      - FIXTURES_YML=.puppet4.fixtures.yml
 bundler_args: --without development
-script: bundle exec rake spec SPEC_OPTS='--format documentation'
+script: bundle exec rake spec SPEC_OPTS='--format documentation' PARSER='future'
 notifications:
   email:
     - justin@downing.us

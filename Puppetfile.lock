@@ -8,7 +8,7 @@ FORGE
       puppetlabs-stdlib (>= 3.0.0)
 
 DEPENDENCIES
-  puppetlabs-concat (< 3.0.0, >= 2.0.0)
+  puppetlabs-concat (< 5.0.0, >= 2.0.0)
   puppetlabs-stdlib (< 5.0.0, >= 4.0.0)
   stahnma-epel (< 2.0.0, >= 1.0.0)
 

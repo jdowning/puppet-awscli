@@ -5,7 +5,6 @@
 # === Variables
 #
 # [$ensure]
-#
 #   Control whether the profile should be present or not
 #   Default: present
 #
@@ -115,6 +114,7 @@ define awscli::profile(
       ensure => 'directory',
       owner  => $user,
       group  => $group_real,
+      mode   => '0700',
     }
   }
 
@@ -144,6 +144,7 @@ define awscli::profile(
       ensure  => 'present',
       owner   => $user,
       group   => $group_real,
+      mode    => '0600',
       require => File["${homedir_real}/.aws"],
     }
   }

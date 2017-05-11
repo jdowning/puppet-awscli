@@ -20,12 +20,10 @@ class awscli::params {
         $pkg_dev = 'python-devel'
       }
 
-      if defined($::operatingsystemrelease) {
-        if $::operatingsystemrelease =~ /^7/ {
-          $pkg_pip = 'python2-pip'
-        } else {
-          $pkg_pip = 'python-pip'
-        }
+      if sprintf('%s', $::operatingsystemrelease) =~ /^7/ {
+        $pkg_pip = 'python2-pip'
+      } else {
+        $pkg_pip = 'python-pip'
       }
     }
     'Darwin': {

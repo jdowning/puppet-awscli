@@ -8,46 +8,60 @@ branches:
     - master
 matrix:
   include:
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="3.4.3"
       - FIXTURES_YML=.puppet3.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="3.5.1"
       - FIXTURES_YML=.puppet3.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="3.6.2"
       - FIXTURES_YML=.puppet3.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="3.7.5"
       - FIXTURES_YML=.puppet3.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="3.8.7"
       - FIXTURES_YML=.puppet3.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="4.2.3"
       - FIXTURES_YML=.puppet4.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="4.3.2"
       - FIXTURES_YML=.puppet4.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="4.4.2"
       - FIXTURES_YML=.puppet4.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="4.5.3"
       - FIXTURES_YML=.puppet4.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="4.6.2"
       - FIXTURES_YML=.puppet4.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="4.7.1"
       - FIXTURES_YML=.puppet4.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="4.8.2"
       - FIXTURES_YML=.puppet4.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="4.9.4"
       - FIXTURES_YML=.puppet4.fixtures.yml
-    - env:
+    - rvm: 2.1.10
+      env:
       - PUPPET_VERSION="4.10.0"
       - FIXTURES_YML=.puppet4.fixtures.yml
 bundler_args: --without development

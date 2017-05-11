@@ -1,8 +1,6 @@
 ---
 sudo: false
 language: ruby
-rvm:
-  - 2.1.10
 branches:
   only:
     - master
@@ -31,11 +29,11 @@ matrix:
     - rvm: 2.1.10
       env:
       - PUPPET_VERSION="4.2.3"
-      - FIXTURES_YML=.puppet4.fixtures.yml
+      - FIXTURES_YML=.puppet3.fixtures.yml
     - rvm: 2.1.10
       env:
       - PUPPET_VERSION="4.3.2"
-      - FIXTURES_YML=.puppet4.fixtures.yml
+      - FIXTURES_YML=.puppet3.fixtures.yml
     - rvm: 2.1.10
       env:
       - PUPPET_VERSION="4.4.2"

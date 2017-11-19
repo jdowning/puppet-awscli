@@ -72,7 +72,7 @@ define awscli::profile(
   $source_profile        = undef,
   $role_session_name     = undef,
   $aws_region            = 'us-east-1',
-  $profile_name          = 'default',
+  $profile_name          = $title,
   $output                = 'json',
 ) {
   if $aws_access_key_id == undef and $aws_secret_access_key == undef {

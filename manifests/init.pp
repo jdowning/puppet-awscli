@@ -86,7 +86,7 @@ class awscli (
 
     'apt' : {
       package { 'awscli':
-        ensure   => 'latest',
+        ensure   => 'present',
         provider => 'apt',
       }
     }

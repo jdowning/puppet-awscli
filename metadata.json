@@ -1,14 +1,14 @@
 {
   "name": "jdowning/awscli",
   "version": "2.1.0",
-  "source": "https://github.com/justindowning/puppet-awscli",
+  "source": "https://github.com/jdowning/puppet-awscli",
   "author": "Justin Downing",
   "license": "Apache-2.0",
   "summary": "Install awscli",
   "description": "Install awscli",
-  "project_page": "https://github.com/justindowning/puppet-awscli",
-  "source": "https://github.com/justindowning/puppet-awscli.git",
-  "issues_url": "https://github.com/justindowning/puppet-awscli/issues",
+  "project_page": "https://github.com/jdowning/puppet-awscli",
+  "source": "https://github.com/jdowning/puppet-awscli.git",
+  "issues_url": "https://github.com/jdowning/puppet-awscli/issues",
   "dependencies": [
     { "name": "stahnma/epel",  "version_requirement": ">= 1.0.0 <2.0.0" },
     { "name": "puppetlabs/stdlib",  "version_requirement": ">= 4.0.0 <5.0.0" },

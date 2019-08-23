@@ -122,11 +122,12 @@ define awscli::profile(
   if ! $skip_credentials {
     if !defined(Concat["${homedir_real}/.aws/credentials"]) {
       concat { "${homedir_real}/.aws/credentials":
-        ensure  => 'present',
-        owner   => $user,
-        group   => $group_real,
-        mode    => '0600',
-        require => File["${homedir_real}/.aws"],
+        ensure    => 'present',
+        owner     => $user,
+        group     => $group_real,
+        mode      => '0600',
+        show_diff => false,
+        require   => File["${homedir_real}/.aws"],
       }
     }
 

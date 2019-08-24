@@ -4,14 +4,14 @@ describe 'awscli', type: 'class' do
   context 'supported OS' do
     ['darwin', 'debian', 'redhat'].each do |osfamily|
       describe "#{osfamily} installation" do
-        let(:facts) {
+        let(:facts) do
           {
             os: {
-              family: "#{osfamily}",
-              release: 6
-            }
+              family: osfamily.to_s,
+              release: 6,
+            },
           }
-        }
+        end
 
         it { is_expected.to contain_class('awscli::deps') }
 
@@ -25,14 +25,14 @@ describe 'awscli', type: 'class' do
       end
 
       describe 'proxy pip setup' do
-        let(:facts) {
+        let(:facts) do
           {
             os: {
-              family: "#{osfamily}",
-              release: 6
-            }
+              family: osfamily.to_s,
+              release: 6,
+            },
           }
-        }
+        end
         let(:params) { { install_options: ['--proxy foo'] } }
 
         it do

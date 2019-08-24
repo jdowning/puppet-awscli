@@ -6,7 +6,7 @@ describe 'awscli::profile', type: :define do
       describe "#{osfamily} installation" do
         let(:facts) do
           {
-            os: { family: "#{osfamily}" },
+            os: { family: osfamily.to_s },
             concat_basedir: '/var/lib/puppet/concat/',
           }
         end
@@ -38,7 +38,7 @@ describe 'awscli::profile', type: :define do
       describe "#{osfamily} installation" do
         let(:facts) do
           {
-            os: { family: "#{osfamily}" },
+            os: { family: osfamily.to_s },
             concat_basedir: '/var/lib/puppet/concat/',
           }
         end

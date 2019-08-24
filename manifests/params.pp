@@ -20,10 +20,13 @@ class awscli::params {
         $pkg_dev = 'python-devel'
       }
 
-      if $::os['release']['major'] == '7' {
-        $pkg_pip = 'python2-pip'
-      } else {
-        $pkg_pip = 'python-pip'
+      case $::os['release']['major'] {
+        '7': {
+          $pkg_pip = 'python2-pip'
+        }
+        default: {
+          $pkg_pip = 'python-pip'
+        }
       }
     }
     'Darwin': {

@@ -1,6 +1,6 @@
 # == Class: awscli::deps::osx
 #
-# This module manages awscli dependencies for Darwin $::osfamily.
+# This module manages awscli dependencies for Darwin $::os['family'].
 #
 class awscli::deps::osx {
   if $awscli::install_pkgdeps {

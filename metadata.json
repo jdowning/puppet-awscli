@@ -1,50 +1,93 @@
 {
-  "name": "jdowning/awscli",
+  "name": "jdowning-awscli",
   "version": "2.1.0",
-  "source": "https://github.com/jdowning/puppet-awscli",
   "author": "Justin Downing",
-  "license": "Apache-2.0",
   "summary": "Install awscli",
-  "description": "Install awscli",
-  "project_page": "https://github.com/jdowning/puppet-awscli",
+  "license": "Apache-2.0",
   "source": "https://github.com/jdowning/puppet-awscli.git",
+  "project_page": "https://github.com/jdowning/puppet-awscli",
   "issues_url": "https://github.com/jdowning/puppet-awscli/issues",
   "dependencies": [
-    { "name": "stahnma/epel",  "version_requirement": ">= 1.0.0 <2.0.0" },
-    { "name": "puppetlabs/stdlib",  "version_requirement": ">= 4.0.0 <5.0.0" },
-    { "name": "puppetlabs/concat",  "version_requirement": ">= 2.0.0 <5.0.0" }
+    {
+      "name": "stahnma/epel",
+      "version_requirement": ">= 1.0.0 <2.0.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.0.0 <5.0.0"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 2.0.0 <5.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Darwin",
-      "operatingsystemrelease": ["10.8", "10.9", "10.10"]
+      "operatingsystemrelease": [
+        "10.8",
+        "10.9",
+        "10.10"
+      ]
     },
     {
       "operatingsystem": "CentOS",
-      "operatingsystemrelease": [ "5", "6", "7" ]
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
     },
     {
       "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [ "5", "6", "7" ]
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
     },
     {
       "operatingsystem": "RedHat",
-      "operatingsystemrelease": [ "5", "6", "7" ]
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
     },
     {
       "operatingsystem": "Scientific",
-      "operatingsystemrelease": [ "5", "6", "7" ]
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
     },
     {
       "operatingsystem": "Debian",
-      "operatingsystemrelease": [ "6", "7" ]
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "10.04", "12.04", "14.04", "16.04", "18.04" ]
+      "operatingsystemrelease": [
+        "10.04",
+        "12.04",
+        "14.04",
+        "16.04",
+        "18.04"
+      ]
     }
   ],
   "requirements": [
-    { "name": "puppet", "version_requirement": ">= 3.4.3 < 5.0.0" }
-  ]
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.4.3 < 5.0.0"
+    }
+  ],
+  "description": "Install awscli",
+  "pdk-version": "1.12.0",
+  "template-url": "pdk-default#1.12.0",
+  "template-ref": "1.12.0-0-g55d9ae2"
 }

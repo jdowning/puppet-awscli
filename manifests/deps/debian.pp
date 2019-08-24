@@ -1,6 +1,6 @@
 # == Class: awscli::deps::debian
 #
-# This module manages awscli dependencies for Debian $::osfamily.
+# This module manages awscli dependencies for Debian $::os['family'].
 #
 class awscli::deps::debian {
   if $awscli::install_pkgdeps {

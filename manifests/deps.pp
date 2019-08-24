@@ -13,7 +13,7 @@
 class awscli::deps (
   $proxy = $awscli::params::proxy,
 ) inherits awscli::params {
-  case $::osfamily {
+  case $::os['family'] {
     'Debian': {
       contain awscli::deps::debian
     }

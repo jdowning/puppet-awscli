@@ -1,6 +1,6 @@
 # == Class: awscli::deps::redhat
 #
-# This module manages awscli dependencies for redhat $::osfamily.
+# This module manages awscli dependencies for redhat $::os['family'].
 #
 class awscli::deps::redhat (
   $proxy        = $awscli::params::proxy,
@@ -17,9 +17,9 @@ class awscli::deps::redhat (
     else {
       include ::epel
     }
-    
+
     Package { require => Class['epel'] }
-  } 
+  }
   if $awscli::install_pkgdeps {
     if ! defined(Package[ $awscli::pkg_dev ]) {
       package { $awscli::pkg_dev: ensure => installed }

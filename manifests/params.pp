@@ -8,28 +8,31 @@ class awscli::params {
   $proxy = undef
   $install_options = undef
 
-  case $::osfamily {
+  case $::os['family'] {
     'Debian': {
       $pkg_dev = 'python-dev'
       $pkg_pip = 'python-pip'
     }
     'RedHat': {
-      if $::operatingsystem == 'Amazon' {
+      if $::os['name'] == 'Amazon' {
         $pkg_dev = 'python27-devel'
       } else {
         $pkg_dev = 'python-devel'
       }
 
-      if sprintf('%s', $::operatingsystemrelease) =~ /^7/ {
-        $pkg_pip = 'python2-pip'
-      } else {
-        $pkg_pip = 'python-pip'
+      case $::os['release']['major'] {
+        '7': {
+          $pkg_pip = 'python2-pip'
+        }
+        default: {
+          $pkg_pip = 'python-pip'
+        }
       }
     }
     'Darwin': {
       $pkg_dev = 'python'
       $pkg_pip = 'brew-pip'
     }
-    default:  { fail("The awscli module does not support ${::osfamily}") }
+    default:  { fail("The awscli module does not support ${::os['family']}") }
   }
 }

@@ -84,11 +84,10 @@ class awscli (
       }
     }
 
-    'apt' : {
+    default: {
       package { 'awscli':
-        ensure   => $version,
-        provider => 'apt',
+        ensure => $version,
       }
     }
-  } 
+  }
 }

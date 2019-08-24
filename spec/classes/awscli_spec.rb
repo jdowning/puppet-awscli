@@ -9,16 +9,16 @@ describe 'awscli', type: 'class' do
             os: {
               family: osfamily.to_s,
               release: {
-                major: 6
+                major: 6,
               },
             },
           }
         end
-        let(:params) {
+        let(:params) do
           {
-            manage_epel: false
+            manage_epel: false,
           }
-        }
+        end
 
         it { is_expected.to contain_class('awscli::deps') }
 
@@ -37,17 +37,17 @@ describe 'awscli', type: 'class' do
             os: {
               family: osfamily.to_s,
               release: {
-                major: 6
+                major: 6,
               },
             },
           }
         end
-        let(:params) {
+        let(:params) do
           {
             install_options: ['--proxy foo'],
-            manage_epel: false
+            manage_epel: false,
           }
-        }
+        end
 
         it do
           is_expected.to contain_package('awscli').with(

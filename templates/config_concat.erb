@@ -11,6 +11,9 @@ role_arn=<%= @role_arn %>
 <% if @source_profile -%>
 source_profile=<%= @source_profile %>
 <% end -%>
+<% if @credential_source -%>
+credential_source=<%= @credential_source %>
+<% end -%>
 <% if @role_session_name -%>
 role_session_name=<%= @role_session_name %>
 <% end -%>

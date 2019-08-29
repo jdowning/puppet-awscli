@@ -32,6 +32,11 @@
 # [$source_profile]
 #   The profile to use for credentials to assume the specified role
 #
+# [credential_source]
+#   Used within EC2 instances or EC2 containers to specify where the AWS CLI can find credentials
+#   to use to assume the role you specified with the role_arn parameter.
+#   You cannot specify both source_profile and credential_source in the same profile.
+#
 # [$role_session_name]
 #   An identifier for the assumed role session
 #
@@ -62,18 +67,19 @@
 # }
 #
 define awscli::profile(
-  $ensure                = 'present',
-  $user                  = 'root',
-  $group                 = undef,
-  $homedir               = undef,
-  $aws_access_key_id     = undef,
-  $aws_secret_access_key = undef,
-  $role_arn              = undef,
-  $source_profile        = undef,
-  $role_session_name     = undef,
-  $aws_region            = 'us-east-1',
-  $profile_name          = 'default',
-  $output                = 'json',
+  $ensure                                                                                 = 'present',
+  $user                                                                                   = 'root',
+  $group                                                                                  = undef,
+  $homedir                                                                                = undef,
+  $aws_access_key_id                                                                      = undef,
+  $aws_secret_access_key                                                                  = undef,
+  $role_arn                                                                               = undef,
+  $source_profile                                                                         = undef,
+  Optional[Enum['Environment', 'Ec2InstanceMetadata', 'EcsContainer']] $credential_source = undef,
+  $role_session_name                                                                      = undef,
+  $aws_region                                                                             = 'us-east-1',
+  $profile_name                                                                           = 'default',
+  $output                                                                                = 'json',
 ) {
   if $aws_access_key_id == undef and $aws_secret_access_key == undef {
     info ('AWS keys for awscli::profile. Your will need IAM roles configured.')
@@ -106,6 +112,10 @@ define awscli::profile(
     }
   } else {
     $group_real = $group
+  }
+
+  if ($source_profile != undef and $credential_source != undef) {
+    fail('aws cli profile cannot contain both source_profile and credential_source config option')
   }
 
   # ensure $homedir/.aws is available

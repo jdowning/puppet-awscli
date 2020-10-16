@@ -2,8 +2,8 @@
 fixtures:
   forge_modules:
     epel:
-      repo: "stahnma/epel"
-      ref: "1.2.2"
+      repo: "puppet/epel"
+      ref: "3.0.1"
     concat:
       repo: "puppetlabs/concat"
       ref: "4.0.0"

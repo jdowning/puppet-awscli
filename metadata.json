@@ -1,6 +1,6 @@
 {
   "name": "jdowning-awscli",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "author": "Justin Downing",
   "summary": "Install awscli",
   "license": "Apache-2.0",

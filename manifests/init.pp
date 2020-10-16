@@ -68,14 +68,14 @@ class awscli (
 ) inherits awscli::params {
 
   case $provider {
-    'pip': {
+    'pip','pip3': {
       class { '::awscli::deps':
         proxy => $proxy,
       }
 
       package { 'awscli':
         ensure          => $version,
-        provider        => 'pip',
+        provider        => $provider,
         install_options => $install_options,
         require         => [
           Package[$pkg_pip],

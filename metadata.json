@@ -84,7 +84,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.4.3 < 5.0.0"
+      "version_requirement": ">= 3.4.3 <= 6.18"
     }
   ],
   "description": "Install awscli",

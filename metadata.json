@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppet/epel",
-      "version_requirement": ">= 3.0.0 <3.0.2"
+      "version_requirement": ">= 3.0.0 <3.99.0"
     },
     {
       "name": "puppetlabs/stdlib",

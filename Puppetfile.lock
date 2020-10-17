@@ -9,4 +9,4 @@ FORGE
 DEPENDENCIES
   puppetlabs-concat (< 5.0.0, >= 2.0.0)
   puppetlabs-stdlib (< 5.0.0, >= 4.0.0)
-  puppet-epel (< 3.0.2, >= 3.0.0)
+  puppet-epel (< 3.99.0, >= 3.0.0)

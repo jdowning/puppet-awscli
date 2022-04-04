@@ -310,4 +310,53 @@ describe 'awscli::profile', type: :define do
       )
     end
   end
+
+  context 'on AWS Node' do
+    let(:facts) do
+      {
+        os: { family: 'debian' },
+        concat_basedir: '/var/lib/puppet/concat/',
+      }
+    end
+
+    let(:title) { 'test_profile' }
+
+    let(:params) do
+      {
+        'user' => 'test',
+        'role_arn'     => 'TESTAWSROLEARN',
+      }
+    end
+
+    ['Environment', 'Ec2InstanceMetadata', 'EcsContainer'].each do |source|
+      it "creates profile for user test with credential_source=#{source}" do
+        params['credential_source'] = source.to_s
+        is_expected.to contain_file('/home/test/.aws').with(
+          ensure: 'directory',
+          owner: 'test',
+          group: 'test',
+          mode: '0700',
+          )
+        is_expected.to contain_concat('/home/test/.aws/config').with(
+          owner: 'test',
+          group: 'test',
+          mode: '0600',
+          )
+        is_expected.to contain_concat__fragment('test_profile-config').with(
+          target: '/home/test/.aws/config',
+          )
+      end
+    end
+
+    it "fails to create profile for user test with credential_source=Invalid" do
+      params['credential_source'] = 'Invalid'
+      is_expected.to compile.and_raise_error(/parameter 'credential_source' expects an undef value or a match for Enum/)
+    end
+
+    it 'fails to create profile with both source_profile and credential_source' do
+      params['credential_source'] = 'Ec2InstanceMetadata'
+      params['source_profile'] = 'development'
+      is_expected.to compile.and_raise_error(/aws cli profile cannot contain both source_profile and credential_source config option/)
+    end
+  end
 end

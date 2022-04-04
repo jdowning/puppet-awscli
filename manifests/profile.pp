@@ -36,6 +36,7 @@
 #   Used within EC2 instances or EC2 containers to specify where the AWS CLI can find credentials
 #   to use to assume the role you specified with the role_arn parameter.
 #   You cannot specify both source_profile and credential_source in the same profile.
+#   More info at https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#using-aws-iam-roles
 #
 # [$role_session_name]
 #   An identifier for the assumed role session
